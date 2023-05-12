@@ -13,7 +13,13 @@ export default function Home() {
   console.log(allDrinks);
   return (
     <div className="main">
-      <h1>loading...</h1>
+      <div className="flex">
+        <div className="cocktail">
+          {/* <Image src={} alt={} width={}/> */}
+          CockTails
+        </div>
+        <div className="mocktail">MockTails</div>
+      </div>
     </div>
   );
 }
