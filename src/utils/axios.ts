@@ -46,3 +46,14 @@ export const getAllDrinks = async () => {
     console.error(err.message);
   }
 };
+
+export const getDrinkById = async (id) => {
+  try {
+    const getDrink = await axios.get(
+      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
+    return await getDrink.data;
+  } catch (err) {
+    console.error(err.message);
+  }
+};
