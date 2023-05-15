@@ -9,6 +9,7 @@ const DrinkCategory = () => {
   const allDrinks = useContext(AllDrinks);
   const [drinks, setDrinks] = useState([]);
   const [drinkType, setDrinkType] = useState('');
+
   useEffect(() => {
     if (router.query) {
       const { type } = router.query;
@@ -24,16 +25,19 @@ const DrinkCategory = () => {
   }, [drinkType]);
   console.log(drinks);
   // console.log(allDrink s);
+
   return (
     <div>
       <Link href={'/'}>Back Home {'>'}</Link>
       <h1>Drink Category</h1>
-      <div className="flex">
-        {drinks
-          ? drinks.map((drink) => (
-              <Drink drink={drink} key={drink.idDrink} type={drinkType} />
-            ))
-          : 'Loading'}
+      <div className="container mx-auto">
+        <div className="grid grid-cols-4 gap-x-2 gap-y-4">
+          {drinks
+            ? drinks.map((drink) => (
+                <Drink drink={drink} key={drink.idDrink} type={drinkType} />
+              ))
+            : 'Loading'}
+        </div>
       </div>
     </div>
   );
