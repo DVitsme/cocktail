@@ -52,7 +52,7 @@ export const getDrinkById = async (id) => {
     const getDrink = await axios.get(
       `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
     );
-    console.log(getDrink.data);
+    // console.log(getDrink.data);
     return getDrink.data.drinks[0];
   } catch (err) {
     console.error(err.message);
