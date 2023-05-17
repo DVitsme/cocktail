@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { AbvDrinkType } from '../types/DrinkType';
 
-const Drink = ({ drink, type }) => {
+const Drink = ({ drink, type }: { drink: AbvDrinkType; type: string }) => {
   const { strDrink, strDrinkThumb, idDrink } = drink;
   return (
     <div>

@@ -12,7 +12,7 @@ const DrinkCategory = () => {
 
   useEffect(() => {
     if (router.query) {
-      const { type } = router.query;
+      const { type } = router.query as { type: string };
       setDrinkType(type);
       const drinkData = async () => {
         const data = await allDrinks[type];

@@ -1,3 +1,4 @@
+import { DrinkType } from '@/types/DrinkType';
 import axios from 'axios';
 import { trace } from 'console';
 
@@ -12,7 +13,7 @@ export const getRandomCocktail = async () => {
     );
     return res.data;
   } catch (err) {
-    console.error(err.message);
+    console.error((err as Error).message);
   }
 };
 
@@ -25,7 +26,7 @@ export const getRandomMocktail = async () => {
     const getSingleDrink = await res.data.drinks[randomNumber];
     return getSingleDrink;
   } catch (err) {
-    console.error(err.message);
+    console.error((err as Error).message);
   }
 };
 
@@ -43,7 +44,7 @@ export const getAllDrinks = async () => {
     allDrinks['non-alcohlic'] = nonAlcoholicData.data.drinks;
     return allDrinks;
   } catch (err) {
-    console.error(err.message);
+    console.error((err as Error).message);
   }
 };
 
@@ -55,6 +56,6 @@ export const getDrinkById = async (id) => {
     // console.log(getDrink.data);
     return getDrink.data.drinks[0];
   } catch (err) {
-    console.error(err.message);
+    console.error((err as Error).message);
   }
 };

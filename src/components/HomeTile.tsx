@@ -2,10 +2,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import { AbvDrinkType } from '@/types/DrinkType';
+
 const HomeTile = ({
-  getFirstDrink: { strDrinkThumb, strDrink, idDrink },
+  getFirstDrink,
   type
+}: {
+  getFirstDrink: AbvDrinkType;
+  type: string;
 }) => {
+  const { strDrinkThumb, strDrink, idDrink } = getFirstDrink;
   return (
     <div>
       <Image
