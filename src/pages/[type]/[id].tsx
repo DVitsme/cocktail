@@ -1,4 +1,5 @@
 import Loading from '@/components/Loading';
+import { DrinkType } from '@/types/DrinkType';
 import { getDrinkById } from '@/utils/axios';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,17 +8,28 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const DrinkId = () => {
   const router = useRouter();
-  const [drink, setDrink] = useState({});
-  const [ingredients, setIngredients] = useState([]);
+  const [drink, setDrink] = useState<DrinkType>({
+    idDrink: 0,
+    strDrink: '',
+    strDrinkThumb: '',
+    strCategory: '',
+    strInstructions: ''
+  });
+  const [ingredients, setIngredients] = useState<
+    {
+      drink: string;
+      amount: string;
+    }[]
+  >([]);
   const [amounts, setAmounts] = useState([]);
 
   useEffect(() => {
-    const tempIngredientsArr = [];
-    const tempAmountsArr = [];
+    const tempIngredientsArr: { drink: string }[] = [];
+    const tempAmountsArr: { drink: string; amount: string }[] = [];
 
     if (router.query.id) {
       const drinkData = async () => {
-        const data = await getDrinkById(router.query.id);
+        const data = (await getDrinkById(router.query.id)) as DrinkType;
         setDrink(data);
         if (await data) {
           for (let ingredient in data) {
@@ -36,6 +48,7 @@ const DrinkId = () => {
             }
           }
         }
+
         setIngredients(tempAmountsArr);
       };
       drinkData();

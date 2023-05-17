@@ -32,7 +32,7 @@ export const getRandomMocktail = async () => {
 
 export const getAllDrinks = async () => {
   try {
-    const allDrinks = {};
+    const allDrinks: { alcohlic?: DrinkType; 'non-alcohlic'?: DrinkType } = {};
     const alcoholicData = await axios.get(
       'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic'
     );
@@ -48,7 +48,7 @@ export const getAllDrinks = async () => {
   }
 };
 
-export const getDrinkById = async (id) => {
+export const getDrinkById = async (id: { id: number }) => {
   try {
     const getDrink = await axios.get(
       `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`

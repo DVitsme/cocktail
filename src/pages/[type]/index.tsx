@@ -1,4 +1,5 @@
 import Drink from '@/components/Drink';
+import { AbvDrinkType } from '@/types/DrinkType';
 import { AllDrinks } from '@/utils/Context';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,8 +7,8 @@ import React, { useContext, useEffect, useState } from 'react';
 
 const DrinkCategory = () => {
   const router = useRouter();
-  const allDrinks = useContext(AllDrinks);
-  const [drinks, setDrinks] = useState([]);
+  const allDrinks = useContext(AllDrinks) as AbvDrinkType[];
+  const [drinks, setDrinks] = useState<AbvDrinkType[]>([]);
   const [drinkType, setDrinkType] = useState('');
 
   useEffect(() => {
