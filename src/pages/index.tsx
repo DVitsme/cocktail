@@ -20,7 +20,6 @@ export default function Home() {
       return [];
     }
   };
-  console.log(getFirstDrink(allDrinks['alcohlic']));
   return (
     <div className="main">
       <div className="flex">
