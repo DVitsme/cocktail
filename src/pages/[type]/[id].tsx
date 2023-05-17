@@ -1,5 +1,6 @@
 import Loading from '@/components/Loading';
 import { getDrinkById } from '@/utils/axios';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
@@ -22,7 +23,7 @@ const DrinkId = () => {
           for (let ingredient in data) {
             if (ingredient.includes('strIngredient')) {
               tempIngredientsArr.push({
-                drink: drink[ingredient]
+                drink: data[ingredient]
               });
             }
           }
@@ -30,7 +31,7 @@ const DrinkId = () => {
             if (amount.includes('strMeasure')) {
               tempAmountsArr.push({
                 drink: tempIngredientsArr[tempAmountsArr.length].drink,
-                amount: drink[amount]
+                amount: data[amount]
               });
             }
           }
@@ -66,7 +67,12 @@ const DrinkId = () => {
           <Link href="/non-alcohlic/">All Mocktails</Link>
         </div>
       </div>
-      <img src={drink.strDrinkThumb} alt="" />
+      <Image
+        src={drink.strDrinkThumb}
+        alt={`image of ${drink.strDrink}`}
+        width={300}
+        height={500}
+      />
       <h1>{drink.strDrink}</h1>
       <p>type: {drink.strCategory}</p>
       <p>steps: {drink.strInstructions}</p>
