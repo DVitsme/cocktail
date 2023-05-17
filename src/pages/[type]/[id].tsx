@@ -29,12 +29,14 @@ const DrinkId = () => {
 
     if (router.query.id) {
       const drinkData = async () => {
+        // @ts-ignore
         const data = (await getDrinkById(router.query.id)) as DrinkType;
         setDrink(data);
         if (await data) {
           for (let ingredient in data) {
             if (ingredient.includes('strIngredient')) {
               tempIngredientsArr.push({
+                // @ts-ignore
                 drink: data[ingredient]
               });
             }
@@ -43,6 +45,7 @@ const DrinkId = () => {
             if (amount.includes('strMeasure')) {
               tempAmountsArr.push({
                 drink: tempIngredientsArr[tempAmountsArr.length].drink,
+                // @ts-ignore
                 amount: data[amount]
               });
             }

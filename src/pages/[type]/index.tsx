@@ -16,6 +16,7 @@ const DrinkCategory = () => {
       const { type } = router.query as { type: string };
       setDrinkType(type);
       const drinkData = async () => {
+        // @ts-ignore
         const data = await allDrinks[type];
         console.log(router.query.type);
         setDrinks(data);
