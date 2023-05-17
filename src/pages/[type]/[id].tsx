@@ -2,7 +2,7 @@ import Loading from '@/components/Loading';
 import { getDrinkById } from '@/utils/axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const DrinkId = () => {
   const router = useRouter();
@@ -12,10 +12,30 @@ const DrinkId = () => {
 
   useEffect(() => {
     const tempIngredientsArr = [];
+    const tempAmountsArr = [];
+
     if (router.query.id) {
       const drinkData = async () => {
         const data = await getDrinkById(router.query.id);
         setDrink(data);
+        if (await data) {
+          for (let ingredient in data) {
+            if (ingredient.includes('strIngredient')) {
+              tempIngredientsArr.push({
+                drink: drink[ingredient]
+              });
+            }
+          }
+          for (let amount in data) {
+            if (amount.includes('strMeasure')) {
+              tempAmountsArr.push({
+                drink: tempIngredientsArr[tempAmountsArr.length].drink,
+                amount: drink[amount]
+              });
+            }
+          }
+        }
+        setIngredients(tempAmountsArr);
       };
       drinkData();
     }
@@ -25,7 +45,6 @@ const DrinkId = () => {
 
   // Possible Probem if ID-slug ever gets renamed here!!!
   if (!router.query.id) return <Loading />;
-
   return (
     <div className="container mx-auto">
       <div className="flex justify-between w-full">
@@ -51,19 +70,13 @@ const DrinkId = () => {
       <h1>{drink.strDrink}</h1>
       <p>type: {drink.strCategory}</p>
       <p>steps: {drink.strInstructions}</p>
+
       <ul>
-        <li>{drink.strIngredient1}</li>
-        <li>{drink.strIngredient2}</li>
-        <li>{drink.strIngredient3}</li>
-        <li>{drink.strIngredient4}</li>
-        <li>{drink.strIngredient5}</li>
-        <li>{drink.strIngredient6}</li>
-        <li>{drink.strIngredient7}</li>
-        <li>{drink.strIngredient8}</li>
-        <li>{drink.strIngredient9}</li>
-        <li>{drink.strIngredient10}</li>
-        <li>{drink.strIngredient11}</li>
-        <li>{drink.strIngredient12}</li>
+        {ingredients.map((ingredient, index) => (
+          <li key={index}>
+            <span>{ingredient.drink}</span> {ingredient.amount}
+          </li>
+        ))}
       </ul>
     </div>
   );
